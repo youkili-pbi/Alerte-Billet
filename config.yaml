@@ -1,0 +1,55 @@
+# ---------------------------------------------------------------
+# Alerte billets business Paris / Marseille -> Asie  (< 1000 EUR)
+# ---------------------------------------------------------------
+origins: [CDG, MRS]        # Paris-CDG et Marseille (ajoute ORY si besoin)
+
+destinations:
+  - NRT   # Tokyo Narita
+  - HND   # Tokyo Haneda
+  - KIX   # Osaka
+  - ICN   # Séoul
+  - PVG   # Shanghai
+  - PEK   # Pékin
+  - HKG   # Hong Kong
+  - TPE   # Taipei
+  - BKK   # Bangkok
+  - SIN   # Singapour
+  - KUL   # Kuala Lumpur
+  - SGN   # Hô Chi Minh-Ville
+  - HAN   # Hanoï
+  - MNL   # Manille
+  - DPS   # Bali
+  - DEL   # Delhi
+  - BOM   # Bombay
+  - CMB   # Colombo
+  - MLE   # Malé (Maldives)
+
+max_price: 1000            # alerte si le billet business est sous ce prix (EUR)
+max_stops: 1               # 1 escale max (pas de vol direct Marseille-Asie)
+currency: EUR
+
+# Périodes surveillées
+windows:
+  - name: Aller-retour novembre-décembre
+    trip: round-trip
+    from: 2026-11-01       # départs entre ces deux dates
+    to: 2026-12-31
+    stay_days: 10          # retour = départ + 10 jours
+    every_days: 6          # une date testée tous les 6 jours (jours de semaine variés)
+
+  - name: Aller simple dès janvier
+    trip: one-way
+    from: 2027-01-01
+    to: 2027-06-30
+    every_days: 20
+
+# Rythme : chaque passage vérifie un lot, puis le suivant reprend là où il s'est arrêté
+searches_per_run: 50
+
+# Détection de chute brutale en plus du seuil (null = désactivée)
+detection:
+  drop_threshold: null     # ex. 0.30 pour alerter aussi à -30 % vs la médiane
+  baseline_days: 21
+  min_observations: 3
+  realert_drop: 0.05       # ré-alerter seulement si le prix baisse encore de 5 %
+  realert_after_days: 7    # ...ou si la dernière alerte date de plus de 7 jours

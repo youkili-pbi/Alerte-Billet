@@ -6,7 +6,7 @@ on:
   workflow_dispatch:          # bouton "Run workflow" pour lancer à la main
 
 permissions:
-  contents: write             # pour sauvegarder history.json dans le dépôt
+  contents: write             # pour sauvegarder history.json et deals.json dans le dépôt
 
 concurrency:
   group: price-watch
@@ -40,6 +40,7 @@ jobs:
         run: |
           git config user.name "price-watch-bot"
           git config user.email "price-watch-bot@users.noreply.github.com"
-          git add history.json || true
-          git diff --cached --quiet || git commit -m "Historique des prix $(date -u +%F-%H%M)"
+          git add history.json deals.json || true
+          git diff --cached --quiet || git commit -m "Prix du $(date -u +%F-%H%M)"
+          git pull --rebase --autostash || true
           git push

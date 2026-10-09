@@ -1,8 +1,9 @@
 # Alerte billets business Paris / Marseille → Asie (< 1 000 €)
 
 Toutes les heures, le script vérifie un lot de 50 recherches sur Google Flights
-(classe business, 1 adulte, 1 escale max) et t'envoie un e-mail si un billet passe
-sous 1 000 €. Le lot suivant reprend là où le précédent s'est arrêté : les ~800
+(classe business, 1 adulte, 1 escale max) et met à jour la page web du dépôt
+(`index.html`, publiée avec GitHub Pages) avec tous les billets sous 1 300 € :
+en vert ceux sous 1 000 €. E-mail en option si les secrets SMTP sont renseignés. Le lot suivant reprend là où le précédent s'est arrêté : les ~800
 combinaisons sont toutes vérifiées en ~16 heures.
 
 - **Novembre–décembre 2026** : allers-retours (départ tous les 6 jours, séjour de 10 jours)

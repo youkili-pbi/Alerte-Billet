@@ -24,7 +24,8 @@ destinations:
   - CMB   # Colombo
   - MLE   # Malé (Maldives)
 
-max_price: 1000            # alerte si le billet business est sous ce prix (EUR)
+max_price: 1000            # seuil d'alerte (EUR) : badge vert sur la page (+ e-mail si configuré)
+display_max_price: 1300    # la page affiche aussi les billets jusqu'à ce prix
 max_stops: 1               # 1 escale max (pas de vol direct Marseille-Asie)
 currency: EUR
 

@@ -7,8 +7,9 @@ Fonctionnement à chaque passage :
   2. Vérifie un lot de `searches_per_run` combinaisons, puis mémorise où il s'est
      arrêté : le passage suivant reprend la suite (rotation complète en quelques heures).
   3. Récupère le prix business le plus bas sur Google Flights (via fast-flights).
-  4. Envoie un e-mail récapitulatif si un prix passe sous `max_price`
-     (et, en option, en cas de chute brutale vs l'historique).
+  4. Met à jour deals.json : tous les vols sous `display_max_price`, avec le détail
+     des segments (horaires, escales, avion). La page index.html affiche ce fichier.
+  5. En option (si les secrets SMTP existent) : e-mail quand un prix passe sous `max_price`.
 
 Usage :
   python watcher.py            # passage réel
@@ -36,6 +37,8 @@ import yaml
 ROOT = Path(__file__).parent
 CONFIG_PATH = ROOT / "config.yaml"
 HISTORY_PATH = ROOT / "history.json"
+DEALS_PATH = ROOT / "deals.json"
+OPTIONS_PER_SEARCH = 3
 HISTORY_RETENTION_DAYS = 60
 
 
@@ -69,6 +72,7 @@ class Quote:
     price: float
     airlines: str
     url: str
+    options: list  # détail des vols les moins chers (dicts prêts pour deals.json)
 
 
 @dataclass
@@ -141,17 +145,69 @@ def fetch_quote(s: Search, currency: str) -> Quote | None:
     priced = [f for f in results if f.price]
     if not priced:
         return None
-    best = min(priced, key=lambda f: f.price)
-    return Quote(price=float(best.price), airlines=", ".join(best.airlines), url=query.url())
+    priced.sort(key=lambda f: f.price)
+    best = priced[0]
+    options = [flight_to_dict(f) for f in priced[:OPTIONS_PER_SEARCH]]
+    return Quote(price=float(best.price), airlines=", ".join(best.airlines),
+                 url=query.url(), options=options)
+
+
+def _iso(sd) -> str:
+    y, m, d = sd.date
+    h, mi = sd.time
+    return f"{y:04d}-{m:02d}-{d:02d}T{h:02d}:{mi:02d}"
+
+
+def flight_to_dict(f) -> dict:
+    """Un résultat Google Flights -> dict lisible par la page (segments, escales, durée)."""
+    segs = [{
+        "from": sf.from_airport.code, "from_name": sf.from_airport.name,
+        "to": sf.to_airport.code, "to_name": sf.to_airport.name,
+        "dep": _iso(sf.departure), "arr": _iso(sf.arrival),
+        "duration": sf.duration, "plane": sf.plane_type or "",
+    } for sf in f.flights]
+    layovers = []
+    for a, b in zip(segs, segs[1:]):
+        # même aéroport, même fuseau : la différence locale est exacte
+        mins = int((datetime.fromisoformat(b["dep"]) - datetime.fromisoformat(a["arr"])).total_seconds() // 60)
+        layovers.append({"airport": a["to"], "airport_name": a["to_name"], "minutes": mins})
+    total = sum(x["duration"] for x in segs) + sum(l["minutes"] for l in layovers)
+    return {"price": float(f.price), "airlines": list(f.airlines), "segments": segs,
+            "layovers": layovers, "duration": total}
 
 
 def fake_quote(s: Search, currency: str) -> Quote:
-    """Prix simulés : ~3 000 € (A/R) ou ~1 900 € (aller simple), 5 % de chances d'une 'erreur de prix'."""
+    """Prix et vols simulés pour tester sans réseau (5 % de chances d'une 'erreur de prix')."""
     base = 3000 if s.ret else 1900
-    price = base * random.uniform(0.85, 1.15)
-    if random.random() < 0.05:
-        price *= random.uniform(0.35, 0.6)
-    return Quote(price=round(price), airlines="Compagnie test", url="https://www.google.com/travel/flights")
+    hubs = [("HEL", "Helsinki", "Finnair"), ("IST", "Istanbul", "Turkish Airlines"),
+            ("DOH", "Doha", "Qatar Airways"), ("DXB", "Dubaï", "Emirates"), ("FRA", "Francfort", "Lufthansa")]
+    options = []
+    for _ in range(OPTIONS_PER_SEARCH):
+        price = base * random.uniform(0.85, 1.15)
+        if random.random() < 0.08:
+            price *= random.uniform(0.3, 0.6)
+        hub, hub_name, airline = random.choice(hubs)
+        dep = datetime.combine(s.depart, datetime.min.time()) + timedelta(hours=random.randint(7, 22), minutes=random.choice([0, 15, 35, 50]))
+        d1 = random.randint(180, 420)
+        arr1 = dep + timedelta(minutes=d1 + 60)
+        lay = random.randint(70, 240)
+        dep2 = arr1 + timedelta(minutes=lay)
+        d2 = random.randint(420, 690)
+        arr2 = dep2 + timedelta(minutes=d2 + 360)
+        segs = [
+            {"from": s.origin, "from_name": s.origin, "to": hub, "to_name": hub_name,
+             "dep": dep.strftime("%Y-%m-%dT%H:%M"), "arr": arr1.strftime("%Y-%m-%dT%H:%M"),
+             "duration": d1, "plane": random.choice(["Airbus A321neo", "Boeing 737 MAX 8", "Airbus A320"])},
+            {"from": hub, "from_name": hub_name, "to": s.destination, "to_name": s.destination,
+             "dep": dep2.strftime("%Y-%m-%dT%H:%M"), "arr": arr2.strftime("%Y-%m-%dT%H:%M"),
+             "duration": d2, "plane": random.choice(["Airbus A350-900", "Boeing 777-300ER", "Boeing 787-9"])},
+        ]
+        options.append({"price": float(round(price)), "airlines": [airline], "segments": segs,
+                        "layovers": [{"airport": hub, "airport_name": hub_name, "minutes": lay}],
+                        "duration": d1 + d2 + lay})
+    options.sort(key=lambda o: o["price"])
+    return Quote(price=options[0]["price"], airlines=", ".join(options[0]["airlines"]),
+                 url="https://www.google.com/travel/flights", options=options)
 
 
 # ----------------------------------------------------------------- historique
@@ -188,6 +244,47 @@ def route_baseline(history: dict, route: str, days: int) -> float | None:
         if key.startswith(route + "|"):
             prices += recent_prices(entry["prices"], days)
     return statistics.median(prices) if len(prices) >= 5 else None
+
+
+# ----------------------------------------------------------------- deals.json (page web)
+def load_deals() -> list:
+    if DEALS_PATH.exists():
+        return json.loads(DEALS_PATH.read_text(encoding="utf-8")).get("deals", [])
+    return []
+
+
+def update_deals(deals: list, s: Search, q: Quote | None, display_max: float, now: str) -> list:
+    """Remplace les offres de cette recherche par le résultat le plus récent."""
+    previous = [d for d in deals if d["key"] == s.key]
+    first_seen = min((d["first_seen"] for d in previous), default=now)
+    prev_best = min((d["price"] for d in previous), default=None)
+    deals = [d for d in deals if d["key"] != s.key]
+    if q is None:
+        return deals
+    for i, opt in enumerate(o for o in q.options if o["price"] <= display_max):
+        deals.append({
+            "key": s.key, "id": f"{s.key}#{i}",
+            "origin": s.origin, "destination": s.destination,
+            "trip": "round-trip" if s.ret else "one-way",
+            "depart": s.depart.isoformat(), "return": s.ret.isoformat() if s.ret else None,
+            **opt,
+            "url": q.url, "first_seen": first_seen, "last_seen": now, "previous_price": prev_best,
+        })
+    return deals
+
+
+def save_deals(deals: list, cfg: dict, today: date, now: str, total: int) -> None:
+    deals = [d for d in deals if d["depart"] >= today.isoformat()]
+    deals.sort(key=lambda d: d["price"])
+    payload = {
+        "updated_at": now,
+        "currency": cfg.get("currency", "EUR"),
+        "alert_price": cfg.get("max_price"),
+        "display_max_price": cfg.get("display_max_price", cfg.get("max_price")),
+        "total_combinations": total,
+        "deals": deals,
+    }
+    DEALS_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
 # ----------------------------------------------------------------- détection
@@ -278,6 +375,8 @@ def main() -> int:
     now = datetime.now(timezone.utc).isoformat()
 
     history = load_history()
+    deals = load_deals()
+    display_max = cfg.get("display_max_price", cfg.get("max_price") or float("inf"))
     state = history.setdefault("_state", {})
     all_searches = build_searches(cfg, today)
     searches = next_batch(all_searches, state, cfg.get("searches_per_run", 50))
@@ -295,6 +394,7 @@ def main() -> int:
             continue
         if not args.fake:
             time.sleep(random.uniform(3, 7))  # rester discret
+        deals = update_deals(deals, s, q, display_max, now)
         if q is None:
             print(f"  – {s.key} : aucun vol")
             continue
@@ -310,8 +410,12 @@ def main() -> int:
         print(f"  {s.key} : {q.price:.0f} {currency}{flag}")
 
     save_history(history, today)
+    save_deals(deals, cfg, today, now, len(all_searches))
+    print(f"\n{len([d for d in deals if d['depart'] >= today.isoformat()])} offre(s) affichée(s) sur la page")
 
-    if alerts:
+    if alerts and not args.fake and not os.environ.get("SMTP_HOST"):
+        print("(e-mail désactivé : pas de secrets SMTP)")
+    elif alerts:
         subject, html = render_email(alerts, currency)
         if args.fake:
             print(f"\n[--fake] e-mail non envoyé : {subject}")
@@ -319,7 +423,7 @@ def main() -> int:
             send_email(subject, html)
             print(f"\nE-mail envoyé : {subject}")
     else:
-        print("\nAucune baisse notable.")
+        print("Aucun prix sous le seuil d'alerte.")
 
     # Échec total = probablement un blocage : on fait échouer le job pour être notifié par GitHub
     if searches and failures == len(searches):

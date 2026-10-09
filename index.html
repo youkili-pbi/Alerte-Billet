@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Business vers l'Asie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f8fb; --surface:#ffffff; --ink:#1f2328; --muted:#5f6670; --line:#e3e7ec;
+  --blue:#1a64d6; --blue-soft:#e8f0fe;
+  --deal:#127a3a; --deal-soft:#e4f4e9;
+  --near:#9a5b00; --near-soft:#fdf1dc;
+  --shadow:0 1px 2px rgba(31,35,40,.06),0 2px 8px rgba(31,35,40,.05);
+  --radius:14px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#15181d; --surface:#1d2128; --ink:#e7eaee; --muted:#9aa3ad; --line:#2d333c;
+    --blue:#8ab4f8; --blue-soft:#22324a;
+    --deal:#6fd08f; --deal-soft:#1d3426;
+    --near:#f1b65a; --near-soft:#3a2e1a;
+    --shadow:0 1px 2px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15181d; --surface:#1d2128; --ink:#e7eaee; --muted:#9aa3ad; --line:#2d333c;
+  --blue:#8ab4f8; --blue-soft:#22324a;
+  --deal:#6fd08f; --deal-soft:#1d3426;
+  --near:#f1b65a; --near-soft:#3a2e1a;
+  --shadow:0 1px 2px rgba(0,0,0,.3);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Figtree",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:28px 20px 64px}
+.num{font-variant-numeric:tabular-nums}
+a{color:var(--blue)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:6px}
+
+/* En-tête */
+header h1{font-size:30px;line-height:1.15;font-weight:700;letter-spacing:-.02em;margin:0 0 6px}
+header p{margin:0;color:var(--muted);max-width:62ch}
+.status{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--muted);font-size:13.5px}
+.status strong{color:var(--ink);font-weight:600}
+.demo{margin-top:14px;padding:10px 14px;border-radius:10px;background:var(--near-soft);color:var(--near);font-size:13.5px}
+
+/* Filtres */
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0 12px;align-items:center}
+.seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px}
+.seg button{border:0;background:none;color:var(--ink);font:inherit;font-size:14px;padding:6px 13px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--blue-soft);color:var(--blue);font-weight:600}
+select{font:inherit;font-size:14px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 30px 7px 13px;appearance:none;cursor:pointer;
+  background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);
+  background-position:calc(100% - 15px) 52%,calc(100% - 10px) 52%;background-size:5px 5px;background-repeat:no-repeat}
+.toggle{display:inline-flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 13px}
+.toggle input{accent-color:var(--deal);margin:0}
+.count{margin:6px 0 10px;color:var(--muted);font-size:14px}
+.count b{color:var(--ink)}
+
+/* Liste */
+.list{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.item+.item{border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:40px minmax(150px,1.3fr) minmax(110px,1fr) minmax(120px,1fr) minmax(110px,.9fr) 132px 28px;gap:14px;align-items:center;
+  width:100%;padding:16px 18px;background:none;border:0;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.row:hover{background:color-mix(in srgb,var(--blue-soft) 35%,transparent)}
+.logo{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-weight:700;font-size:13px;color:#fff;letter-spacing:.02em}
+.main{font-size:16.5px;font-weight:600}
+.main sup{font-size:11px;font-weight:600;color:var(--muted);margin-left:2px}
+.sub{color:var(--muted);font-size:13.5px;margin-top:1px}
+.price{text-align:right}
+.price .amt{font-size:21px;font-weight:700;letter-spacing:-.01em}
+.price.deal .amt{color:var(--deal)}
+.price.near .amt{color:var(--near)}
+.meter{position:relative;height:4px;border-radius:2px;background:var(--line);margin:6px 0 4px auto;width:96px}
+.meter i{position:absolute;left:0;top:0;bottom:0;border-radius:2px}
+.meter b{position:absolute;top:-3px;width:2px;height:10px;background:var(--muted);border-radius:1px}
+.deal .meter i{background:var(--deal)} .near .meter i{background:var(--near)}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.tag{font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px}
+.tag.new{background:var(--blue-soft);color:var(--blue)}
+.tag.drop{background:var(--deal-soft);color:var(--deal)}
+.chev{display:block;width:22px;height:22px;transition:transform .2s ease;color:var(--muted);transform-origin:50% 50%;transform-box:fill-box}
+.row[aria-expanded="true"] .chev{transform:rotate(180deg)}
+
+/* Détail */
+.detail{display:none;padding:4px 18px 20px 72px}
+.item.open .detail{display:block}
+.legs{border-left:2px dotted var(--line);margin-left:6px;padding-left:22px}
+.stop{position:relative;padding:2px 0}
+.stop::before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--muted)}
+.stop .t{font-weight:600}
+.flight{color:var(--muted);font-size:13.5px;padding:10px 0 12px}
+.layover{margin:6px 0 10px -22px;padding:10px 14px 10px 22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:14px}
+.layover.long{color:var(--near)}
+.actions{margin-top:16px;display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;text-decoration:none;font-weight:600;font-size:14.5px;padding:10px 18px;border-radius:999px}
+:root[data-theme="dark"] .btn{color:#10233f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#10233f}}
+.seen{color:var(--muted);font-size:13px}
+
+.empty{padding:48px 24px;text-align:center;color:var(--muted)}
+.empty strong{display:block;color:var(--ink);font-size:17px;margin-bottom:6px}
+footer{margin-top:22px;color:var(--muted);font-size:13px;max-width:70ch}
+
+@media (max-width:760px){
+  .wrap{padding:20px 14px 48px}
+  header h1{font-size:25px}
+  .row{grid-template-columns:36px 1fr auto;grid-template-areas:"logo times price" "logo route price" "logo date price";gap:2px 12px;padding:14px}
+  .row .c-logo{grid-area:logo;align-self:start}
+  .row .c-times{grid-area:times}
+  .row .c-dur{grid-area:route}
+  .row .c-stops{display:none}
+  .row .c-date{grid-area:date}
+  .row .c-price{grid-area:price;align-self:start}
+  .row .c-chev{display:none}
+  .c-dur,.c-date{display:flex;flex-wrap:wrap;gap:0 6px;align-items:baseline}
+  .c-dur .main,.c-date .main{font-size:13.5px;font-weight:500;color:var(--muted)}
+  .c-dur .sub::before,.c-date .sub::before{content:"· "}
+  .c-times .main{font-size:15.5px}
+  .c-price .sub{display:none}
+  .tag{font-size:11px;padding:1px 7px}
+  .c-price .tags{flex-direction:column;align-items:flex-end;gap:4px}
+  .c-times{min-width:0}
+  .detail{padding:0 14px 18px 22px}
+  .price .amt{font-size:19px}
+  .meter{width:72px}
+}
+@media (prefers-reduced-motion:reduce){.chev{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Business vers l'Asie</h1>
+    <p id="intro">Billets en classe business au départ de Paris et Marseille, vérifiés toutes les heures sur Google Flights.</p>
+    <div class="status" id="status"></div>
+    <div class="demo" id="demo" hidden>Aperçu avec des vols fictifs : la vraie liste apparaîtra ici dès le premier passage du robot sur GitHub.</div>
+  </header>
+
+  <div class="filters" role="group" aria-label="Filtres">
+    <div class="seg" data-filter="origin" aria-label="Départ">
+      <button aria-pressed="true" data-v="all">Tous départs</button>
+      <button aria-pressed="false" data-v="CDG">Paris</button>
+      <button aria-pressed="false" data-v="MRS">Marseille</button>
+    </div>
+    <div class="seg" data-filter="trip" aria-label="Type de billet">
+      <button aria-pressed="true" data-v="all">Tous</button>
+      <button aria-pressed="false" data-v="round-trip">Aller-retour</button>
+      <button aria-pressed="false" data-v="one-way">Aller simple</button>
+    </div>
+    <select id="dest" aria-label="Destination"><option value="all">Toutes destinations</option></select>
+    <label class="toggle"><input type="checkbox" id="onlyDeals"> <span id="onlyLabel">Sous le seuil uniquement</span></label>
+    <select id="sort" aria-label="Trier">
+      <option value="price">Prix le plus bas</option>
+      <option value="date">Départ le plus proche</option>
+      <option value="new">Nouveautés d'abord</option>
+      <option value="duration">Durée la plus courte</option>
+    </select>
+  </div>
+
+  <div class="count" id="count" aria-live="polite"></div>
+  <div class="list" id="list"></div>
+
+  <footer>Les prix sont ceux affichés par Google Flights au moment de la vérification, pour 1 adulte. Ce type de tarif peut disparaître en quelques heures : vérifie toujours le prix final avant de réserver.</footer>
+</div>
+
+<script>
+const DEMO = {"updated_at":"2026-10-09T13:42:00+00:00","currency":"EUR","alert_price":1000,"display_max_price":1300,"total_combinations":798,"deals":[{"key":"MRS-CMB|2027-01-01|OW","id":"MRS-CMB|2027-01-01|OW#0","origin":"MRS","destination":"CMB","trip":"one-way","depart":"2027-01-01","return":null,"price":596.0,"airlines":["Turkish Airlines"],"segments":[{"from":"MRS","from_name":"MRS","to":"IST","to_name":"Istanbul","dep":"2027-01-01T14:15","arr":"2027-01-01T20:46","duration":331,"plane":"Airbus A321neo"},{"from":"IST","from_name":"Istanbul","to":"CMB","to_name":"CMB","dep":"2027-01-02T00:10","arr":"2027-01-02T15:50","duration":580,"plane":"Airbus A350-900"}],"layovers":[{"airport":"IST","airport_name":"Istanbul","minutes":204}],"duration":1115,"url":"https://www.google.com/travel/flights","first_seen":"2026-10-09T11:00:00+00:00","last_seen":"2026-10-09T12:00:00+00:00","previous_price":null},{"key":"MRS-PEK|2027-03-22|OW","id":"MRS-PEK|2027-03-22|OW#0","origin":"MRS","destination":"PEK","trip":"one-way","depart":"2027-03-22","return":null,"price":611.0,"airlines":["Qatar Airways"],"segments":[{"from":"MRS","from_name":"MRS","to":"DOH","to_name":"Doha","dep":"2027-03-22T16:50","arr":"2027-03-22T21:39","duration":229,"plane":"Airbus A321neo"},{"from":"DOH","from_name":"Doha","to":"PEK","to_name":"PEK","dep":"2027-03-22T23:04","arr":"2027-03-23T14:48","duration":584,"plane":"Boeing 787-9"}],"layovers":[{"airport":"DOH","airport_name":"Doha","minutes":85}],"duration":898,"url":"https://www.google.com/travel/flights","first_seen":"2026-10-09T06:00:00+00:00","last_seen":"2026-10-08T23:00:00+00:00","previous_price":721},{"key":"CDG-DPS|2027-03-02|OW","id":"CDG-DPS|2027-03-02|OW#0","origin":"CDG","destination":"DPS","trip":"one-way","depart":"2027-03-02","return":null,"price":738.0,"airlines":["Lufthansa"],"segments":[{"from":"CDG","from_name":"CDG","to":"FRA","to_name":"Francfort","dep":"2027-03-02T07:15","arr":"2027-03-02T14:39","duration":384,"plane":"Boeing 737 MAX 8"},{"from":"FRA","from_name":"Francfort","to":"DPS","to_name":"DPS","dep":"2027-03-02T16:54","arr":"2027-03-03T07:15","duration":501,"plane":"Boeing 787-9"}],"layovers":[{"airport":"FRA","airport_name":"Francfort","minutes":135}],"duration":1020,"url":"https://www.google.com/travel/flights","first_seen":"2026-10-08T08:00:00+00:00","last_seen":"2026-10-09T11:00:00+00:00","previous_price":null},{"key":"CDG-PEK|2027-06-30|OW","id":"CDG-PEK|2027-06-30|OW#0","origin":"CDG","destination":"PEK","trip":"one-way","depart":"2027-06-30","return":null,"price":892.0,"airlines":["Emirates"],"segments":[{"from":"CDG","from_name":"CDG","to":"DXB","to_name":"Dubaï","dep":"2027-06-30T10:15","arr":"2027-06-30T16:28","duration":313,"plane":"Airbus A320"},{"from":"DXB","from_name":"Dubaï","to":"PEK","to_name":"PEK","dep":"2027-06-30T18:12","arr":"2027-07-01T10:01","duration":589,"plane":"Boeing 787-9"}],"layovers":[{"airport":"DXB","airport_name":"Dubaï","minutes":104}],"duration":1006,"url":"https://www.google.com/travel/flights","first_seen":"2026-10-07T10:00:00+00:00","last_seen":"2026-10-09T12:00:00+00:00","previous_price":null},{"key":"MRS-DPS|2027-05-21|OW","id":"MRS-DPS|2027-05-21|OW#0","origin":"MRS","destination":"DPS","trip":"one-way","depart":"2027-05-21","return":null,"price":1046.0,"airlines":["Finnair"],"segments":[{"from":"MRS","from_name":"MRS","to":"HEL","to_name":"Helsinki","dep":"2027-05-21T22:50","arr":"2027-05-22T05:30","duration":340,"plane":"Boeing 737 MAX 8"},{"from":"HEL","from_name":"Helsinki","to":"DPS","to_name":"DPS","dep":"2027-05-22T06:48","arr":"2027-05-22T22:45","duration":597,"plane":"Boeing 787-9"}],"layovers":[{"airport":"HEL","airport_name":"Helsinki","minutes":78}],"duration":1015,"url":"https://www.google.com/travel/flights","first_seen":"2026-10-09T06:00:00+00:00","last_seen":"2026-10-09T04:00:00+00:00","previous_price":null},{"key":"MRS-MNL|2026-12-13|2026-12-23","id":"MRS-MNL|2026-12-13|2026-12-23#0","origin":"MRS","destination":"MNL","trip":"round-trip","depart":"2026-12-13","return":"2026-12-23","price":1076.0,"airlines":["Lufthansa"],"segments":[{"from":"MRS","from_name":"MRS","to":"FRA","to_name":"Francfort","dep":"2026-12-13T12:00","arr":"2026-12-13T17:26","duration":266,"plane":"Boeing 737 MAX 8"},{"from":"FRA","from_name":"Francfort","to":"MNL","to_name":"MNL","dep":"2026-12-13T21:18","arr":"2026-12-14T14:26","duration":668,"plane":"Boeing 777-300ER"}],"layovers":[{"airport":"FRA","airport_name":"Francfort","minutes":232}],"duration":1166,"url":"https://www.google.com/travel/flights","first_seen":"2026-10-07T10:00:00+00:00","last_seen":"2026-10-09T05:00:00+00:00","previous_price":null},{"key":"CDG-NRT|2026-12-19|2026-12-29","id":"CDG-NRT|2026-12-19|2026-12-29#0","origin":"CDG","destination":"NRT","trip":"round-trip","depart":"2026-12-19","return":"2026-12-29","price":1223.0,"airlines":["Turkish Airlines"],"segments":[{"from":"CDG","from_name":"CDG","to":"IST","to_name":"Istanbul","dep":"2026-12-19T13:00","arr":"2026-12-19T19:33","duration":333,"plane":"Airbus A320"},{"from":"IST","from_name":"Istanbul","to":"NRT","to_name":"NRT","dep":"2026-12-19T21:43","arr":"2026-12-20T13:03","duration":560,"plane":"Boeing 777-300ER"}],"layovers":[{"airport":"IST","airport_name":"Istanbul","minutes":130}],"duration":1023,"url":"https://www.google.com/travel/flights","first_seen":"2026-10-09T06:00:00+00:00","last_seen":"2026-10-09T02:00:00+00:00","previous_price":null},{"key":"CDG-SGN|2027-03-02|OW","id":"CDG-SGN|2027-03-02|OW#0","origin":"CDG","destination":"SGN","trip":"one-way","depart":"2027-03-02","return":null,"price":1277.0,"airlines":["Emirates"],"segments":[{"from":"CDG","from_name":"CDG","to":"DXB","to_name":"Dubaï","dep":"2027-03-02T20:50","arr":"2027-03-03T02:39","duration":289,"plane":"Boeing 737 MAX 8"},{"from":"DXB","from_name":"Dubaï","to":"SGN","to_name":"SGN","dep":"2027-03-03T03:59","arr":"2027-03-03T18:43","duration":524,"plane":"Boeing 787-9"}],"layovers":[{"airport":"DXB","airport_name":"Dubaï","minutes":80}],"duration":893,"url":"https://www.google.com/travel/flights","first_seen":"2026-10-09T06:00:00+00:00","last_seen":"2026-10-09T04:00:00+00:00","previous_price":1507}]};
+
+const CITY = {CDG:"Paris",ORY:"Paris",MRS:"Marseille",NRT:"Tokyo",HND:"Tokyo",KIX:"Osaka",ICN:"Séoul",PVG:"Shanghai",PEK:"Pékin",
+  HKG:"Hong Kong",TPE:"Taipei",BKK:"Bangkok",SIN:"Singapour",KUL:"Kuala Lumpur",SGN:"Hô Chi Minh-Ville",HAN:"Hanoï",MNL:"Manille",
+  DPS:"Bali",DEL:"Delhi",BOM:"Bombay",CMB:"Colombo",MLE:"Malé",HEL:"Helsinki",IST:"Istanbul",DOH:"Doha",DXB:"Dubaï",AUH:"Abou Dabi",
+  FRA:"Francfort",MUC:"Munich",AMS:"Amsterdam",ZRH:"Zurich",LHR:"Londres",FCO:"Rome",MAD:"Madrid",VIE:"Vienne",CPH:"Copenhague"};
+const city = (code, name) => CITY[code] || (name && name !== code ? name : code);
+
+const state = {origin:"all", trip:"all", dest:"all", only:false, sort:"price", open:new Set()};
+let DATA = null;
+
+const fmtEUR = (v, cur) => new Intl.NumberFormat("fr-FR",{style:"currency",currency:cur||"EUR",maximumFractionDigits:0}).format(v);
+const fmtTime = iso => iso.slice(11,16);
+const fmtDate = (iso, opts={weekday:"short",day:"numeric",month:"short"}) =>
+  new Intl.DateTimeFormat("fr-FR",opts).format(new Date(iso.slice(0,10)+"T12:00:00"));
+const fmtDur = m => `${Math.floor(m/60)} h ${String(m%60).padStart(2,"0")}`;
+const dayDiff = (a,b) => Math.round((new Date(b.slice(0,10)) - new Date(a.slice(0,10)))/864e5);
+function rel(iso){
+  const m = Math.max(0, Math.round((Date.now() - new Date(iso))/6e4));
+  if (m < 1) return "à l'instant";
+  if (m < 60) return `il y a ${m} min`;
+  const h = Math.round(m/60); if (h < 24) return `il y a ${h} h`;
+  const d = Math.round(h/24); return `il y a ${d} jour${d>1?"s":""}`;
+}
+function hue(s){let h=7;for(const c of s)h=(h*31+c.charCodeAt(0))>>>0;return Math.round((h%997)*137.508)%360}
+function initials(name){const w=name.replace(/[^A-Za-zÀ-ÿ ]/g,"").split(/\s+/).filter(Boolean);return (w.length>1?w[0][0]+w[1][0]:name.slice(0,2)).toUpperCase()}
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function filtered(){
+  const alert = DATA.alert_price;
+  let rows = DATA.deals.filter(d =>
+    (state.origin==="all" || d.origin===state.origin) &&
+    (state.trip==="all" || d.trip===state.trip) &&
+    (state.dest==="all" || d.destination===state.dest) &&
+    (!state.only || (alert && d.price < alert)));
+  const by = {
+    price:(a,b)=>a.price-b.price,
+    date:(a,b)=>a.depart.localeCompare(b.depart)||a.price-b.price,
+    new:(a,b)=>b.first_seen.localeCompare(a.first_seen)||a.price-b.price,
+    duration:(a,b)=>a.duration-b.duration||a.price-b.price,
+  }[state.sort];
+  return rows.sort(by);
+}
+
+function rowHTML(d){
+  const s0 = d.segments[0], sN = d.segments[d.segments.length-1];
+  const plus = dayDiff(s0.dep, sN.arr);
+  const airline = d.airlines.join(", ") || "Compagnie inconnue";
+  const h = hue(d.airlines[0]||"x");
+  const stops = d.layovers.length;
+  const stopsTxt = stops===0 ? "Direct" : `${stops} escale${stops>1?"s":""}`;
+  const stopsSub = d.layovers.map(l=>`${fmtDur(l.minutes)} ${l.airport}`).join(", ");
+  const alert = DATA.alert_price, max = DATA.display_max_price || alert;
+  const kind = alert && d.price < alert ? "deal" : "near";
+  const pct = Math.min(100, d.price / max * 100), tick = alert && max ? alert/max*100 : null;
+  const isNew = (Date.now() - new Date(d.first_seen)) < 864e5;
+  const dropped = d.previous_price && d.previous_price > d.price;
+  const tripTxt = d.trip==="round-trip" ? `Retour ${fmtDate(d.return,{day:"numeric",month:"short"})}` : "Aller simple";
+  const above = kind==="near" && alert ? `+${Math.round((d.price/alert-1)*100)} % vs seuil` : "sous le seuil";
+  const open = state.open.has(d.id);
+
+  let legs = "";
+  d.segments.forEach((s,i)=>{
+    legs += `<div class="stop"><span class="t num">${fmtTime(s.dep)}</span> · ${esc(city(s.from,s.from_name))} (${s.from})</div>
+      <div class="flight">Durée du vol : ${fmtDur(s.duration)}${s.plane?`<br>${esc(s.plane)}`:""}</div>
+      <div class="stop"><span class="t num">${fmtTime(s.arr)}</span>${dayDiff(s.dep,s.arr)>0?`<sup>+${dayDiff(s.dep,s.arr)}</sup>`:""} · ${esc(city(s.to,s.to_name))} (${s.to})</div>`;
+    const l = d.layovers[i];
+    if (l) legs += `<div class="layover ${l.minutes>=300?"long":""}">Escale de ${fmtDur(l.minutes)} à ${esc(city(l.airport,l.airport_name))} (${l.airport})${l.minutes>=300?" : longue attente":""}</div>`;
+  });
+
+  return `<div class="item${open?" open":""}">
+    <button class="row" aria-expanded="${open}" data-id="${esc(d.id)}">
+      <div class="c-logo"><div class="logo" style="background:hsl(${h} 55% 42%)" aria-hidden="true">${esc(initials(airline))}</div></div>
+      <div class="c-times"><div class="main num">${fmtTime(s0.dep)} – ${fmtTime(sN.arr)}${plus>0?`<sup>+${plus}</sup>`:""}</div><div class="sub">${esc(airline)}</div></div>
+      <div class="c-dur"><div class="main num">${fmtDur(d.duration)}</div><div class="sub">${d.origin}–${d.destination}</div></div>
+      <div class="c-stops"><div class="main">${stopsTxt}</div><div class="sub num">${esc(stopsSub)}</div></div>
+      <div class="c-date"><div class="main">${fmtDate(d.depart)}</div><div class="sub">${tripTxt}</div></div>
+      <div class="c-price price ${kind}">
+        <div class="amt num">${fmtEUR(d.price, DATA.currency)}</div>
+        <div class="meter" title="${above}"><i style="width:${pct}%"></i>${tick?`<b style="left:${tick}%"></b>`:""}</div>
+        <div class="sub">${above}</div>
+        ${isNew||dropped?`<div class="tags" style="justify-content:flex-end">${isNew?`<span class="tag new">Nouveau</span>`:""}${dropped?`<span class="tag drop">Baisse de ${fmtEUR(d.previous_price-d.price, DATA.currency)}</span>`:""}</div>`:""}
+      </div>
+      <div class="c-chev"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
+    </button>
+    <div class="detail">
+      <div class="legs">${legs}</div>
+      <div class="actions">
+        <a class="btn" href="${esc(d.url)}" target="_blank" rel="noopener">Voir sur Google Flights</a>
+        <span class="seen">${esc(city(d.origin))} → ${esc(city(d.destination))}, ${fmtDate(d.depart,{weekday:"long",day:"numeric",month:"long"})}${d.return?` au ${fmtDate(d.return,{weekday:"long",day:"numeric",month:"long"})}`:""}. Prix vérifié ${rel(d.last_seen)}.</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+function render(){
+  const rows = filtered();
+  const alert = DATA.alert_price;
+  const under = rows.filter(d=>alert && d.price<alert).length;
+  document.getElementById("count").innerHTML = rows.length
+    ? `<b>${rows.length} billet${rows.length>1?"s":""}</b>${alert?`, dont ${under} sous ${fmtEUR(alert,DATA.currency)}`:""}`
+    : "";
+  document.getElementById("list").innerHTML = rows.length ? rows.map(rowHTML).join("") :
+    `<div class="empty"><strong>Aucun billet pour ces filtres</strong>${DATA.deals.length?"Élargis les filtres pour voir les autres offres.":`Rien sous ${fmtEUR(DATA.display_max_price||alert,DATA.currency)} pour l'instant. Le robot vérifie toutes les heures : reviens demain.`}</div>`;
+}
+
+function init(data, isDemo){
+  DATA = data;
+  document.getElementById("demo").hidden = !isDemo;
+  const cur = data.currency, alert = data.alert_price, max = data.display_max_price || alert;
+  document.getElementById("intro").textContent =
+    `Billets en classe business au départ de Paris et Marseille, à moins de ${fmtEUR(max,cur)}. En vert, ceux sous ton seuil de ${fmtEUR(alert,cur)}.`;
+  document.getElementById("onlyLabel").textContent = `Sous ${fmtEUR(alert,cur)} uniquement`;
+  document.getElementById("status").innerHTML =
+    `<span>Mise à jour <strong>${rel(data.updated_at)}</strong></span><span>${data.total_combinations} combinaisons de vols surveillées en continu</span>`;
+  const dests = [...new Set(data.deals.map(d=>d.destination))].sort((a,b)=>city(a).localeCompare(city(b),"fr"));
+  const sel = document.getElementById("dest");
+  sel.innerHTML = `<option value="all">Toutes destinations</option>` + dests.map(c=>`<option value="${c}">${esc(city(c))} (${c})</option>`).join("");
+  render();
+}
+
+document.querySelectorAll(".seg").forEach(seg=>seg.addEventListener("click",e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  seg.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed", x===b));
+  state[seg.dataset.filter] = b.dataset.v; render();
+}));
+document.getElementById("dest").addEventListener("change",e=>{state.dest=e.target.value;render()});
+document.getElementById("sort").addEventListener("change",e=>{state.sort=e.target.value;render()});
+document.getElementById("onlyDeals").addEventListener("change",e=>{state.only=e.target.checked;render()});
+document.getElementById("list").addEventListener("click",e=>{
+  if (e.target.closest("a")) return;
+  const row = e.target.closest(".row"); if(!row) return;
+  const id = row.dataset.id, item = row.parentElement;
+  const open = !item.classList.contains("open");
+  item.classList.toggle("open", open); row.setAttribute("aria-expanded", open);
+  open ? state.open.add(id) : state.open.delete(id);
+});
+
+(async()=>{
+  try{
+    const r = await fetch("deals.json?t="+Date.now(), {cache:"no-store"});
+    if(!r.ok) throw new Error(r.status);
+    init(await r.json(), false);
+  }catch(e){ init(DEMO, true); }
+})();
+</script>
+</body>
+</html>

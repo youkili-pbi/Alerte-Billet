@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-18T04:30:22.835978+00:00",
+ "updated_at": "2026-10-18T09:36:31.499514+00:00",
  "currency": "EUR",
  "alert_price": 1000,
  "display_max_price": 1300,
@@ -51,53 +51,6 @@
    "first_seen": "2026-10-18T04:30:22.835978+00:00",
    "last_seen": "2026-10-18T04:30:22.835978+00:00",
    "previous_price": null
-  },
-  {
-   "key": "CDG-MLE|2027-05-21|OW",
-   "id": "CDG-MLE|2027-05-21|OW#0",
-   "origin": "CDG",
-   "destination": "MLE",
-   "trip": "one-way",
-   "depart": "2027-05-21",
-   "return": null,
-   "price": 1188.0,
-   "airlines": [
-    "Etihad"
-   ],
-   "segments": [
-    {
-     "from": "CDG",
-     "from_name": "Aéroport de Paris-Charles de Gaulle",
-     "to": "AUH",
-     "to_name": "Zayed International Airport",
-     "dep": "2027-05-21T10:40",
-     "arr": "2027-05-21T19:35",
-     "duration": 415,
-     "plane": "Airbus A380"
-    },
-    {
-     "from": "AUH",
-     "from_name": "Zayed International Airport",
-     "to": "MLE",
-     "to_name": "Aéroport international de Malé",
-     "dep": "2027-05-21T23:55",
-     "arr": "2027-05-22T05:15",
-     "duration": 260,
-     "plane": "Boeing 787"
-    }
-   ],
-   "layovers": [
-    {
-     "airport": "AUH",
-     "airport_name": "Zayed International Airport",
-     "minutes": 260
-    }
-   ],
-   "duration": 935,
-   "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjctMDUtMjEoAWoFEgNDREdyBRIDTUxFQgEBSAOYAQI=&hl=fr&curr=EUR",
-   "first_seen": "2026-10-11T22:54:01.107831+00:00",
-   "last_seen": "2026-10-15T18:17:10.935572+00:00",
-   "previous_price": 1188.0
   }
  ]
 }

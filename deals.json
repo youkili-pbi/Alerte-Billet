@@ -1,57 +1,10 @@
 {
- "updated_at": "2026-10-26T19:18:04.744350+00:00",
+ "updated_at": "2026-10-26T23:52:08.251567+00:00",
  "currency": "EUR",
  "alert_price": 1000,
  "display_max_price": 1300,
  "total_combinations": 798,
  "deals": [
-  {
-   "key": "CDG-BOM|2027-03-02|OW",
-   "id": "CDG-BOM|2027-03-02|OW#0",
-   "origin": "CDG",
-   "destination": "BOM",
-   "trip": "one-way",
-   "depart": "2027-03-02",
-   "return": null,
-   "price": 788.0,
-   "airlines": [
-    "Azerbaijan Airlines"
-   ],
-   "segments": [
-    {
-     "from": "CDG",
-     "from_name": "Aéroport de Paris-Charles de Gaulle",
-     "to": "GYD",
-     "to_name": "Bakou Airport",
-     "dep": "2027-03-02T10:55",
-     "arr": "2027-03-02T19:15",
-     "duration": 320,
-     "plane": "Airbus A321neo"
-    },
-    {
-     "from": "GYD",
-     "from_name": "Bakou Airport",
-     "to": "BOM",
-     "to_name": "Aéroport international Chhatrapati Shivaji",
-     "dep": "2027-03-03T21:00",
-     "arr": "2027-03-04T03:00",
-     "duration": 270,
-     "plane": "Airbus A320neo"
-    }
-   ],
-   "layovers": [
-    {
-     "airport": "GYD",
-     "airport_name": "Bakou Airport",
-     "minutes": 1545
-    }
-   ],
-   "duration": 2135,
-   "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjctMDMtMDIoAWoFEgNDREdyBRIDQk9NQgEBSAOYAQI=&hl=fr&curr=EUR",
-   "first_seen": "2026-10-18T04:30:22.835978+00:00",
-   "last_seen": "2026-10-24T05:51:31.932835+00:00",
-   "previous_price": 788.0
-  },
   {
    "key": "CDG-MLE|2027-05-21|OW",
    "id": "CDG-MLE|2027-05-21|OW#0",
@@ -96,8 +49,8 @@
    "duration": 1705,
    "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjctMDUtMjEoAWoFEgNDREdyBRIDTUxFQgEBSAOYAQI=&hl=fr&curr=EUR",
    "first_seen": "2026-10-21T01:34:16.920807+00:00",
-   "last_seen": "2026-10-24T05:51:31.932835+00:00",
-   "previous_price": 1117.0
+   "last_seen": "2026-10-26T23:52:08.251567+00:00",
+   "previous_price": 1131.0
   }
  ]
 }

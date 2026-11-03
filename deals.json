@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-03T10:49:48.848711+00:00",
+ "updated_at": "2026-11-03T18:26:24.218382+00:00",
  "currency": "EUR",
  "alert_price": 1000,
  "display_max_price": 1300,
@@ -13,7 +13,7 @@
    "trip": "one-way",
    "depart": "2027-05-21",
    "return": null,
-   "price": 1170.0,
+   "price": 1169.0,
    "airlines": [
     "Etihad"
    ],
@@ -49,8 +49,8 @@
    "duration": 1705,
    "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjctMDUtMjEoAWoFEgNDREdyBRIDTUxFQgEBSAOYAQI=&hl=fr&curr=EUR",
    "first_seen": "2026-10-21T01:34:16.920807+00:00",
-   "last_seen": "2026-10-30T18:36:29.133552+00:00",
-   "previous_price": 1131.0
+   "last_seen": "2026-11-03T18:26:24.218382+00:00",
+   "previous_price": 1170.0
   }
  ]
 }

@@ -1,10 +1,57 @@
 {
- "updated_at": "2026-11-07T07:08:15.319122+00:00",
+ "updated_at": "2026-11-07T13:59:47.450244+00:00",
  "currency": "EUR",
  "alert_price": 1000,
  "display_max_price": 1300,
  "total_combinations": 722,
  "deals": [
+  {
+   "key": "CDG-MLE|2027-03-22|OW",
+   "id": "CDG-MLE|2027-03-22|OW#0",
+   "origin": "CDG",
+   "destination": "MLE",
+   "trip": "one-way",
+   "depart": "2027-03-22",
+   "return": null,
+   "price": 1166.0,
+   "airlines": [
+    "Etihad"
+   ],
+   "segments": [
+    {
+     "from": "CDG",
+     "from_name": "Aéroport de Paris-Charles de Gaulle",
+     "to": "AUH",
+     "to_name": "Zayed International Airport",
+     "dep": "2027-03-22T21:15",
+     "arr": "2027-03-23T06:45",
+     "duration": 390,
+     "plane": "Airbus A350"
+    },
+    {
+     "from": "AUH",
+     "from_name": "Zayed International Airport",
+     "to": "MLE",
+     "to_name": "Aéroport international de Malé",
+     "dep": "2027-03-23T23:55",
+     "arr": "2027-03-24T05:05",
+     "duration": 250,
+     "plane": "Boeing 787"
+    }
+   ],
+   "layovers": [
+    {
+     "airport": "AUH",
+     "airport_name": "Zayed International Airport",
+     "minutes": 1030
+    }
+   ],
+   "duration": 1670,
+   "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjctMDMtMjIoAWoFEgNDREdyBRIDTUxFQgEBSAOYAQI=&hl=fr&curr=EUR",
+   "first_seen": "2026-11-07T13:59:47.450244+00:00",
+   "last_seen": "2026-11-07T13:59:47.450244+00:00",
+   "previous_price": null
+  },
   {
    "key": "CDG-MLE|2027-05-21|OW",
    "id": "CDG-MLE|2027-05-21|OW#0",
@@ -13,7 +60,7 @@
    "trip": "one-way",
    "depart": "2027-05-21",
    "return": null,
-   "price": 1169.0,
+   "price": 1166.0,
    "airlines": [
     "Etihad"
    ],
@@ -49,8 +96,196 @@
    "duration": 1705,
    "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjctMDUtMjEoAWoFEgNDREdyBRIDTUxFQgEBSAOYAQI=&hl=fr&curr=EUR",
    "first_seen": "2026-10-21T01:34:16.920807+00:00",
-   "last_seen": "2026-11-03T18:26:24.218382+00:00",
-   "previous_price": 1170.0
+   "last_seen": "2026-11-07T13:59:47.450244+00:00",
+   "previous_price": 1169.0
+  },
+  {
+   "key": "CDG-MLE|2027-06-10|OW",
+   "id": "CDG-MLE|2027-06-10|OW#0",
+   "origin": "CDG",
+   "destination": "MLE",
+   "trip": "one-way",
+   "depart": "2027-06-10",
+   "return": null,
+   "price": 1166.0,
+   "airlines": [
+    "Etihad"
+   ],
+   "segments": [
+    {
+     "from": "CDG",
+     "from_name": "Aéroport de Paris-Charles de Gaulle",
+     "to": "AUH",
+     "to_name": "Zayed International Airport",
+     "dep": "2027-06-10T21:50",
+     "arr": "2027-06-11T06:30",
+     "duration": 400,
+     "plane": "Boeing 787"
+    },
+    {
+     "from": "AUH",
+     "from_name": "Zayed International Airport",
+     "to": "MLE",
+     "to_name": "Aéroport international de Malé",
+     "dep": "2027-06-11T23:55",
+     "arr": "2027-06-12T05:15",
+     "duration": 260,
+     "plane": "Boeing 787"
+    }
+   ],
+   "layovers": [
+    {
+     "airport": "AUH",
+     "airport_name": "Zayed International Airport",
+     "minutes": 1045
+    }
+   ],
+   "duration": 1705,
+   "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjctMDYtMTAoAWoFEgNDREdyBRIDTUxFQgEBSAOYAQI=&hl=fr&curr=EUR",
+   "first_seen": "2026-11-07T13:59:47.450244+00:00",
+   "last_seen": "2026-11-07T13:59:47.450244+00:00",
+   "previous_price": null
+  },
+  {
+   "key": "CDG-MLE|2027-06-30|OW",
+   "id": "CDG-MLE|2027-06-30|OW#0",
+   "origin": "CDG",
+   "destination": "MLE",
+   "trip": "one-way",
+   "depart": "2027-06-30",
+   "return": null,
+   "price": 1166.0,
+   "airlines": [
+    "Etihad"
+   ],
+   "segments": [
+    {
+     "from": "CDG",
+     "from_name": "Aéroport de Paris-Charles de Gaulle",
+     "to": "AUH",
+     "to_name": "Zayed International Airport",
+     "dep": "2027-06-30T21:50",
+     "arr": "2027-07-01T06:30",
+     "duration": 400,
+     "plane": "Boeing 787"
+    },
+    {
+     "from": "AUH",
+     "from_name": "Zayed International Airport",
+     "to": "MLE",
+     "to_name": "Aéroport international de Malé",
+     "dep": "2027-07-01T23:55",
+     "arr": "2027-07-02T05:15",
+     "duration": 260,
+     "plane": "Boeing 787"
+    }
+   ],
+   "layovers": [
+    {
+     "airport": "AUH",
+     "airport_name": "Zayed International Airport",
+     "minutes": 1045
+    }
+   ],
+   "duration": 1705,
+   "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjctMDYtMzAoAWoFEgNDREdyBRIDTUxFQgEBSAOYAQI=&hl=fr&curr=EUR",
+   "first_seen": "2026-11-07T13:59:47.450244+00:00",
+   "last_seen": "2026-11-07T13:59:47.450244+00:00",
+   "previous_price": null
+  },
+  {
+   "key": "CDG-MLE|2027-06-30|OW",
+   "id": "CDG-MLE|2027-06-30|OW#1",
+   "origin": "CDG",
+   "destination": "MLE",
+   "trip": "one-way",
+   "depart": "2027-06-30",
+   "return": null,
+   "price": 1233.0,
+   "airlines": [
+    "Etihad"
+   ],
+   "segments": [
+    {
+     "from": "CDG",
+     "from_name": "Aéroport de Paris-Charles de Gaulle",
+     "to": "AUH",
+     "to_name": "Zayed International Airport",
+     "dep": "2027-06-30T15:50",
+     "arr": "2027-07-01T00:45",
+     "duration": 415,
+     "plane": "Airbus A321neo"
+    },
+    {
+     "from": "AUH",
+     "from_name": "Zayed International Airport",
+     "to": "MLE",
+     "to_name": "Aéroport international de Malé",
+     "dep": "2027-07-01T08:30",
+     "arr": "2027-07-01T13:45",
+     "duration": 255,
+     "plane": "Boeing 787"
+    }
+   ],
+   "layovers": [
+    {
+     "airport": "AUH",
+     "airport_name": "Zayed International Airport",
+     "minutes": 465
+    }
+   ],
+   "duration": 1135,
+   "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjctMDYtMzAoAWoFEgNDREdyBRIDTUxFQgEBSAOYAQI=&hl=fr&curr=EUR",
+   "first_seen": "2026-11-07T13:59:47.450244+00:00",
+   "last_seen": "2026-11-07T13:59:47.450244+00:00",
+   "previous_price": null
+  },
+  {
+   "key": "CDG-MLE|2027-05-21|OW",
+   "id": "CDG-MLE|2027-05-21|OW#1",
+   "origin": "CDG",
+   "destination": "MLE",
+   "trip": "one-way",
+   "depart": "2027-05-21",
+   "return": null,
+   "price": 1279.0,
+   "airlines": [
+    "SriLankan"
+   ],
+   "segments": [
+    {
+     "from": "CDG",
+     "from_name": "Aéroport de Paris-Charles de Gaulle",
+     "to": "CMB",
+     "to_name": "Aéroport international Bandaranaike",
+     "dep": "2027-05-21T15:05",
+     "arr": "2027-05-22T05:05",
+     "duration": 630,
+     "plane": "Airbus A330"
+    },
+    {
+     "from": "CMB",
+     "from_name": "Aéroport international Bandaranaike",
+     "to": "MLE",
+     "to_name": "Aéroport international de Malé",
+     "dep": "2027-05-22T07:20",
+     "arr": "2027-05-22T08:15",
+     "duration": 85,
+     "plane": "Airbus A330"
+    }
+   ],
+   "layovers": [
+    {
+     "airport": "CMB",
+     "airport_name": "Aéroport international Bandaranaike",
+     "minutes": 135
+    }
+   ],
+   "duration": 850,
+   "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjctMDUtMjEoAWoFEgNDREdyBRIDTUxFQgEBSAOYAQI=&hl=fr&curr=EUR",
+   "first_seen": "2026-10-21T01:34:16.920807+00:00",
+   "last_seen": "2026-11-07T13:59:47.450244+00:00",
+   "previous_price": 1169.0
   }
  ]
 }

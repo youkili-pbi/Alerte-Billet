@@ -1,9 +1,9 @@
 {
- "updated_at": "2026-11-12T18:54:32.332639+00:00",
+ "updated_at": "2026-11-13T00:20:54.999322+00:00",
  "currency": "EUR",
  "alert_price": 1000,
  "display_max_price": 1300,
- "total_combinations": 722,
+ "total_combinations": 684,
  "deals": [
   {
    "key": "CDG-MLE|2027-05-21|OW",

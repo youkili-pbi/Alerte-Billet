@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-14T21:28:51.250155+00:00",
+ "updated_at": "2026-11-15T01:53:53.110729+00:00",
  "currency": "EUR",
  "alert_price": 1000,
  "display_max_price": 1300,
@@ -107,7 +107,7 @@
    "trip": "one-way",
    "depart": "2027-05-21",
    "return": null,
-   "price": 1168.0,
+   "price": 1172.0,
    "airlines": [
     "Etihad"
    ],
@@ -143,8 +143,55 @@
    "duration": 1705,
    "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjctMDUtMjEoAWoFEgNDREdyBRIDTUxFQgEBSAOYAQI=&hl=fr&curr=EUR",
    "first_seen": "2026-10-21T01:34:16.920807+00:00",
-   "last_seen": "2026-11-11T06:14:35.706693+00:00",
-   "previous_price": 1166.0
+   "last_seen": "2026-11-15T01:53:53.110729+00:00",
+   "previous_price": 1168.0
+  },
+  {
+   "key": "CDG-MLE|2027-06-30|OW",
+   "id": "CDG-MLE|2027-06-30|OW#0",
+   "origin": "CDG",
+   "destination": "MLE",
+   "trip": "one-way",
+   "depart": "2027-06-30",
+   "return": null,
+   "price": 1172.0,
+   "airlines": [
+    "Etihad"
+   ],
+   "segments": [
+    {
+     "from": "CDG",
+     "from_name": "Aéroport de Paris-Charles de Gaulle",
+     "to": "AUH",
+     "to_name": "Zayed International Airport",
+     "dep": "2027-06-30T21:50",
+     "arr": "2027-07-01T06:30",
+     "duration": 400,
+     "plane": "Boeing 787"
+    },
+    {
+     "from": "AUH",
+     "from_name": "Zayed International Airport",
+     "to": "MLE",
+     "to_name": "Aéroport international de Malé",
+     "dep": "2027-07-01T23:55",
+     "arr": "2027-07-02T05:15",
+     "duration": 260,
+     "plane": "Boeing 787"
+    }
+   ],
+   "layovers": [
+    {
+     "airport": "AUH",
+     "airport_name": "Zayed International Airport",
+     "minutes": 1045
+    }
+   ],
+   "duration": 1705,
+   "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjctMDYtMzAoAWoFEgNDREdyBRIDTUxFQgEBSAOYAQI=&hl=fr&curr=EUR",
+   "first_seen": "2026-11-15T01:53:53.110729+00:00",
+   "last_seen": "2026-11-15T01:53:53.110729+00:00",
+   "previous_price": null
   },
   {
    "key": "CDG-DEL|2027-04-11|OW",

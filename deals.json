@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-22T11:20:35.661159+00:00",
+ "updated_at": "2026-11-22T19:36:38.400489+00:00",
  "currency": "EUR",
  "alert_price": 1000,
  "display_max_price": 1300,
@@ -13,7 +13,7 @@
    "trip": "one-way",
    "depart": "2027-01-21",
    "return": null,
-   "price": 1058.0,
+   "price": 966.0,
    "airlines": [
     "EgyptAir"
    ],
@@ -49,8 +49,8 @@
    "duration": 1835,
    "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjctMDEtMjEoAWoFEgNDREdyBRIDREVMQgEBSAOYAQI=&hl=fr&curr=EUR",
    "first_seen": "2026-11-14T21:28:51.250155+00:00",
-   "last_seen": "2026-11-14T21:28:51.250155+00:00",
-   "previous_price": null
+   "last_seen": "2026-11-22T19:36:38.400489+00:00",
+   "previous_price": 1058.0
   },
   {
    "key": "CDG-DEL|2027-02-10|OW",
@@ -60,7 +60,7 @@
    "trip": "one-way",
    "depart": "2027-02-10",
    "return": null,
-   "price": 1058.0,
+   "price": 966.0,
    "airlines": [
     "EgyptAir"
    ],
@@ -96,8 +96,8 @@
    "duration": 1835,
    "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjctMDItMTAoAWoFEgNDREdyBRIDREVMQgEBSAOYAQI=&hl=fr&curr=EUR",
    "first_seen": "2026-11-14T21:28:51.250155+00:00",
-   "last_seen": "2026-11-14T21:28:51.250155+00:00",
-   "previous_price": null
+   "last_seen": "2026-11-22T19:36:38.400489+00:00",
+   "previous_price": 1058.0
   },
   {
    "key": "CDG-MLE|2027-06-10|OW",
@@ -192,53 +192,6 @@
    "first_seen": "2026-11-15T01:53:53.110729+00:00",
    "last_seen": "2026-11-19T03:25:18.611741+00:00",
    "previous_price": 1172.0
-  },
-  {
-   "key": "CDG-DEL|2027-04-11|OW",
-   "id": "CDG-DEL|2027-04-11|OW#0",
-   "origin": "CDG",
-   "destination": "DEL",
-   "trip": "one-way",
-   "depart": "2027-04-11",
-   "return": null,
-   "price": 1246.0,
-   "airlines": [
-    "EgyptAir"
-   ],
-   "segments": [
-    {
-     "from": "CDG",
-     "from_name": "Aéroport de Paris-Charles de Gaulle",
-     "to": "CAI",
-     "to_name": "Aéroport du Caire",
-     "dep": "2027-04-11T16:00",
-     "arr": "2027-04-11T20:20",
-     "duration": 260,
-     "plane": "Airbus A350"
-    },
-    {
-     "from": "CAI",
-     "from_name": "Aéroport du Caire",
-     "to": "DEL",
-     "to_name": "Aéroport international Indira Gandhi",
-     "dep": "2027-04-11T23:59",
-     "arr": "2027-04-12T09:50",
-     "duration": 381,
-     "plane": "Airbus A320neo"
-    }
-   ],
-   "layovers": [
-    {
-     "airport": "CAI",
-     "airport_name": "Aéroport du Caire",
-     "minutes": 219
-    }
-   ],
-   "duration": 860,
-   "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjctMDQtMTEoAWoFEgNDREdyBRIDREVMQgEBSAOYAQI=&hl=fr&curr=EUR",
-   "first_seen": "2026-11-14T21:28:51.250155+00:00",
-   "last_seen": "2026-11-14T21:28:51.250155+00:00",
-   "previous_price": null
   }
  ]
 }

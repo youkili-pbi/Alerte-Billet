@@ -1,9 +1,9 @@
 {
- "updated_at": "2026-11-24T17:40:52.334129+00:00",
+ "updated_at": "2026-11-25T02:25:13.344904+00:00",
  "currency": "EUR",
  "alert_price": 1000,
  "display_max_price": 1300,
- "total_combinations": 646,
+ "total_combinations": 608,
  "deals": [
   {
    "key": "CDG-DEL|2027-01-21|OW",
